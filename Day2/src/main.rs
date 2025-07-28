@@ -20,19 +20,25 @@ fn array_colapse_with_division<const N: usize>(arr: &mut [i32; N]) {
     arr.iter_mut().for_each(|x| *x = product / *x);
 }
 
-/*
-fn arrayColapse(k: i32, arr: &[i32]) -> &[i32] {
-    let mut product: i32 = 1;
+fn array_colapse<const N: usize>(arr: &mut [i32; N]) {
+    let reference = *arr;
 
-    for i in 0..arr.len(){
-        if ()
+    for i in 0..arr.len() {
+        let mut product: i32 = 1;
+        for j in 0..arr.len() {
+            if j != i {
+                product = product * reference[j];
+            }
+        }
+        arr[i] = product;
     }
 }
-*/
 
 fn main() {
     let mut test1: [i32; 5] = [1, 2, 3, 4, 5];
+    let mut test2: [i32; 3] = [3, 2, 1];
     array_colapse_with_division(&mut test1);
-
     print!("testing with division [1, 2, 3, 4, 5]: {:#?}", test1);
+    array_colapse(&mut test2);
+    print!("testing with division [2,3,6]: {:#?}", test2);
 }

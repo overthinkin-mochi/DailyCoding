@@ -20,11 +20,21 @@ fn square_digits(num: u64) -> u64 {
         let squared = digit.pow(2);
         output.push_str(&squared.to_string());
     }
+    output.parse().unwrap()
+}
 
-    return output.parse().unwrap();
+fn square_digits_functional(num: u64) -> u64 {
+    num.to_string()
+        .chars()
+        .map(|c| format!("{}", c.to_digit(10).unwrap().pow(2)))
+        .collect::<String>()
+        .parse()
+        .unwrap()
 }
 
 fn main() {
     let test1: u64 = 765;
     println!("{}", square_digits(test1));
+    let test2: u64 = 9119;
+    println!("{}", square_digits_functional(test2));
 }

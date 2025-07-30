@@ -30,6 +30,23 @@ Notes:
 ify the input array in-place.
 
 */
+use std::cmp;
+
+fn sq_in_rect_recursive(lng: i32, wdth: i32) -> Option<Vec<i32>> {
+    //base case
+    if lng == wdth {
+        return None;
+    }
+
+    let large = cmp::max(lng, wdth);
+    let small = cmp::min(lng, wdth);
+
+    match sq_in_rect(small, large - small) {
+        None => Some(vec![small, small]),
+        Some(x) => Some([vec![small], x].concat()),
+    }
+}
+
 fn sq_in_rect(lng: i32, wdth: i32) -> Option<Vec<i32>> {
     if lng == wdth {
         return None;
@@ -52,5 +69,5 @@ fn sq_in_rect(lng: i32, wdth: i32) -> Option<Vec<i32>> {
 }
 
 fn main() {
-    println!("slices of rectangle: {:?}", sq_in_rect(3, 7));
+    println!("slices of rectangle: {:?}", sq_in_rect_recursive(3, 7));
 }
